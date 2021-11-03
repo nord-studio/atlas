@@ -1,12 +1,11 @@
-import { Client, Collection, PartialWebhookMixin } from 'discord.js';
-// import { connect } from 'mongoose';
+import { Client, Collection } from 'discord.js';
+import mongoose from 'mongoose';
 import path from 'path';
 import { readdirSync } from 'fs';
 import { Command } from '../Interfaces/Command';
 import { Event } from '../Interfaces/Event';
 import { Config } from '../Interfaces/Config';
 import ConfigJson from '../config.json';
-
 
 class ExtendedClient extends Client {
     public commands: Collection<string, Command> = new Collection();
@@ -16,11 +15,12 @@ class ExtendedClient extends Client {
 
     public async init() {
         this.login(this.config.token);
-        // connect(this.config.mongoURI, {
-        //     useUnifiedTopology: true,
-        //     useFindAndModify: true,
-        //     UseNewUrlParser: true
-        // })
+        
+        await mongoose.connect(this.config.mongoURI).then(() => {
+            console.log('Connected to AtlasDB Successfully!');
+        }).catch((err) => {
+            console.log('Failed to connect to AtlasDB! ' + err);
+        });
 
         /* Command handler */
         const commandPath = path.join(__dirname, "..", "Commands");
@@ -44,7 +44,6 @@ class ExtendedClient extends Client {
         readdirSync(eventPath).forEach(async (file) => {
             const { event } = await import(`${eventPath}/${file}`);
             this.events.set(event.name, event);
-            console.log(event);
             this.on(event.name, event.run.bind(null, this));
         });
     }
