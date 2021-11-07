@@ -7,13 +7,17 @@ export const command: Command = {
     description: 'Set the welcome message for the server',
     aliases: [],
     run: async (client, message, args) => {
-        if (!message.member.permissions.has('ADMINISTRATOR')) {
-            message.channel.send('You do not have access to this command.');
+
+        const cache = client.welcomes;
+        const { guild, member, channel } = message;
+
+        if (!member.permissions.has('ADMINISTRATOR')) {
+            channel.send('You do not have access to this command.');
             return;
         }
 
-        if (message.content.length < 2) {
-            message.channel.send('Please provide a welcome message.');
+        if (!args) {
+            channel.send('Please provide a welcome message.');
             return;
         }
 
@@ -24,18 +28,20 @@ export const command: Command = {
 
                 split.shift();
                 text = split.join(' ');
+
+                cache[guild.id] = [channel.id, text];
                 
                 await welcomeSchema.findOneAndUpdate({
-                    _id: message.guild.id,
+                    _id: guild.id,
                 }, {
-                    _id: message.guild.id,
-                    channelID: message.channel.id,
+                    _id: guild.id,
+                    channelID: channel.id,
                     message: text,
                 }, {
                     upsert: true,
                 });
 
-                message.channel.send(`Successfully set the server welcome message to **${text}**!`);
+                channel.send(`Successfully set the server welcome message to **${text}**!`);
             } finally {
                 disconnect();
             }
