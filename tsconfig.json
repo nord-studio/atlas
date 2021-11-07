@@ -4,17 +4,17 @@
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"target": "ESNext",
-		"outDir": "dist",
-		"sourceMap": true,
+		"outDir": "build",
+		"sourceMap": false,
 		"esModuleInterop": true,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"allowSyntheticDefaultImports": true,
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"declaration": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"importHelpers": true
 	},
 	"include": ["src"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules", "**/*.spec.ts"]
 }
