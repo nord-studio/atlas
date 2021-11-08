@@ -15,12 +15,6 @@ class ExtendedClient extends Client {
 
     public async init() {
         this.login(this.config.token);
-        
-        await mongoose.connect(this.config.mongoURI).then(() => {
-            console.log('Connected to AtlasDB Successfully!');
-        }).catch((err) => {
-            console.log('Failed to connect to AtlasDB! ' + err);
-        });
 
         /* Command handler */
         const commandPath = path.join(__dirname, "..", "Commands");
@@ -30,6 +24,8 @@ class ExtendedClient extends Client {
             for (const file of commands) {
                 const { command } = require(`${commandPath}/${dir}/${file}`);
                 this.commands.set(command.name, command);
+
+                if (command?.aliases === undefined) return;
 
                 if (command?.aliases.length !== 0) {
                     command.aliases.forEach((alias) => {
