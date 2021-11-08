@@ -5,6 +5,7 @@ import welcomeSchema from '../../schemas/welcomeSchema';
 export const command: Command = {
     name: 'setwelcome',
     description: 'Set the welcome message for the server',
+    category: 'Guild',
     aliases: [],
     run: async (client, message, args) => {
 
