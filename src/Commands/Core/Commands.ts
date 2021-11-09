@@ -28,8 +28,7 @@ export const command: Command = {
                 .setAuthor(`Command: ${command.name}`)
                 .addField("Description", command.description, false)
                 .addField("Category", command.category, false)
-                .addField("Aliases", command.aliases ? command.aliases.join(', ') : 'None', false)
-                .setFooter(client.config.embedFooter);
+                .addField("Aliases", command.aliases ? command.aliases.join(', ') : 'None', false);
             
             message.channel.send({ embeds: [embed] });
         }
