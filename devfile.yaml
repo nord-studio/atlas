@@ -1,0 +1,23 @@
+apiVersion: 1.0.0
+metadata:
+  name: atlas
+projects:
+  - name: atlas
+    source:
+      location: 'https://github.com/Nord-Studio/Atlas'
+      type: git
+components:
+  - id: vscode/typescript-language-features/latest
+    type: chePlugin
+  - id: ms-vscode/node-debug2/latest
+    type: chePlugin
+  - id: github/vscode-pull-request-github/latest
+    type: chePlugin
+  - mountSources: true
+    endpoints:
+      - name: nodejs
+        port: 3000
+    memoryLimit: 512Mi
+    type: dockerimage
+    alias: nodejs
+    image: 'ghcr.io/parkervcp/yolks:nodejs_16@sha256:596ea93d67a62a384ccddf5bb45f23051539c26b276e8d778ce3f28f31e83272'
