@@ -5,6 +5,7 @@ export const command: Command = {
     name: 'help',
     description: 'Provides infomation about Atlas.',
     category: 'Core',
+    aliases: [],
     run: async (client, message) => {
         const embed = new MessageEmbed()
             .setColor('#81A1C1')

@@ -2,20 +2,23 @@ import { MessageEmbed } from "discord.js";
 import { Command } from "../../Interfaces/Command";
 
 export const command: Command = {
-    name: "commands",
-    description: "Lists all commands",
-    category: "Core",
-    aliases: ["cmds"],
+    name: 'commands',
+    description: 'Lists all commands',
+    category: 'Core',
+    aliases: ['cmds'],
     run: async (client, message, args) => {
         if (!args[0]) {
             const core = client.commands.filter(x => x.category === "Core").map((x) => '`' + x.name + '`').join(', ');
             const guild = client.commands.filter(x => x.category === "Guild").map((x) => '`' + x.name + '`').join(', ');
+            const mod = client.commands.filter(x => x.category === "Moderation").map((x) => '`' + x.name + '`').join(', ');
+            const music = client.commands.filter(x => x.category === "Music").map((x) => '`' + x.name + '`').join(', ');
 
             const embed = new MessageEmbed()
                 .setColor('#81A1C1')
-                .setAuthor('Commands')
                 .addField("Core", core, false)
                 .addField("Guild", guild, false)
+                .addField("Moderation", mod, false)
+                .addField("Music", music, false)
                 .setFooter(`To find more info on a specific command, use ${client.config.prefix}commands [command]`)
             
             message.channel.send({ embeds: [embed] }, );
