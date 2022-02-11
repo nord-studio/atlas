@@ -6,18 +6,14 @@ import { Command } from '../Interfaces/Command';
 import { Event } from '../Interfaces/Event';
 import { Config } from '../Interfaces/Config';
 import ConfigJson from '../config.json';
-import * as dbplayer from 'discord-player';
-import { Downloader } from '@discord-player/downloader';
 class ExtendedClient extends Client {
     public commands: Collection<string, Command> = new Collection();
     public events: Collection<string, Event> = new Collection();
     public config: Config = ConfigJson;
     public aliases: Collection<string, Command> = new Collection();
-    public player = new dbplayer.Player(this);
 
     public async init() {
         this.login(this.config.token);
-        this.player.use("YOUTUBE_DL", Downloader);
 
         /* Command handler */
         const commandPath = path.join(__dirname, "..", "Commands");
@@ -48,7 +44,6 @@ class ExtendedClient extends Client {
     }
 
     public welcomes: Object = {}
-    public volumes: Object = {}
 }
 
 export default ExtendedClient;
