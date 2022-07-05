@@ -27,7 +27,7 @@
   "dependencies": {
     "@discord-player/downloader": "^3.0.1",
     "@discord-player/extractor": "^3.0.2",
-    "@discordjs/opus": "^0.5.3",
+    "@discordjs/opus": "^0.8.0",
     "discord-player": "^5.1.0-dev.1636095464.54bb4b0",
     "discord.js": "^13.3.1",
     "mongoose": "^6.0.12",
