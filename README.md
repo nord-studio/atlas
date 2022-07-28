@@ -1,6 +1,2 @@
-<div>
-  <img src='https://i.imgur.com/nTWEVgh.png' style="border-radius:50%" height='169' align='right'/>
-  <h1>Atlas</h1>
-  <p>An advanced moderation bot built with privacy and security in mind.</p>
-  <p>Use <code>>help</code> to get started</p>
-</div>
+# Atlas
+At the moment, Atlas isn't in development. This repo will be archived until we start development again. Sorry for any inconvenience.
